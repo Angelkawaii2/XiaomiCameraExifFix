@@ -1,5 +1,7 @@
 # Xiaomi 13/14 Camera EXIF Fix / 小米13/14 相机 EXIF 修复
 
+![Lint Test](https://github.com/Angelkawaii2/XiaomiCameraExifFix/actions/workflows/python-package.yml/badge.svg)
+
 一个用于 “修复” 小米13/14 相机专业模式下 DNG 文件缺少 exif 信息的脚本。    
 A script to “fix” missing exif information in DNG files in Xiaomi 13/14 series camera pro mode.
 
