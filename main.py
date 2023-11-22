@@ -131,7 +131,7 @@ def process():
                         raise e
                 except KeyError:
                     raise RuntimeError(
-                        f"Error: Unknown Focal:{exif_focal} in MODEL_CONFIG: {model_config["LensMap"]}")
+                        f"Error: Unknown Focal:{exif_focal} in MODEL_CONFIG: {model_config['LensMap']}")
             except KeyError:
                 raise RuntimeError(f"Error: Unsupported Device: {exif_model}")
 
