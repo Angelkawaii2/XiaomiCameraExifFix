@@ -18,7 +18,9 @@ MODEL_CONFIG = {
         "LensMap": {
             2.83: "Xiaomi 13 Ultra Front UltraWide Camera",
             2.0: "Xiaomi 13 Ultra Rear UltraWide Camera",  # Sony IMX 858
+            2.03: "Xiaomi 13 Ultra Rear UltraWide Camera",  # Sony IMX 858
             8.7: "Xiaomi 13 Ultra Rear Wide Camera",  # Sony IMX 989
+            9.87: "Xiaomi 13 Ultra Rear Telephoto Camera",  # Sony IMX 858
             9.9: "Xiaomi 13 Ultra Rear Telephoto Camera",  # Sony IMX 858
             19.4: "Xiaomi 13 Ultra Rear Super Telephoto Camera",  # Sony IMX 858
         }
@@ -42,7 +44,7 @@ JPG_DIR_PATH = ""
 
 basic_tags = ["EXIF:*", "EXIF:GPS*", "XMP:LensModel", "Composite:GPSPosition"]
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.WARN)
 
 
 def process():
@@ -124,7 +126,7 @@ def process():
                             if is_trash_jpg:
                                 if not DRY_RUN:
                                     os.remove(jpg_full_path)
-                                logging.info(f"Trash jpg: {jpg_full_path} has been removed.")
+                                print(f"Trash jpg: {jpg_full_path} has been removed.")
                     except ExifToolExecuteError as e:
                         print(e.stderr)
                         print(e.stdout)
