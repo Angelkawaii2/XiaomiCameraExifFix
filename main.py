@@ -29,11 +29,17 @@ MODEL_CONFIG = {
     "23127PN0CC": {
         "NAME": "Xiaomi 14",
         "LensMap": {
+            9.0: "Xiaomi 14 Rear Telephoto Camera (75mm)",
+            6.5: "Xiaomi 14 Rear Wide Camera (23mm)",
+            2.2: "Xiaomi 14 Rear UltraWide Camera (14mm)"
         }
     },
     "23116PN5BC": {
         "NAME": "Xiaomi 14 Pro",
         "LensMap": {
+            10.1: "Xiaomi 14 Pro Rear Telephoto Camera (75mm)",
+            6.7: "Xiaomi 14 Pro Rear Wide Camera (23mm)",
+            2.2: "Xiaomi 14 Pro Rear UltraWide Camera (14mm)"
         }
     },
 }

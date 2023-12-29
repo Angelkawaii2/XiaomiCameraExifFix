@@ -20,10 +20,10 @@ allowing the DNG to "preserve" the shooting information that should otherwise be
 ----
 
 ## 支持机型 / Supported Devices
-
-- [x] Xiaomi 13 / Pro / Ultra
-- [ ] Xiaomi 14 (TBC)
-- [ ] Xiaomi 14 Pro (TBC)
+- [ ] Xiaomi 13 / Pro (No FocalLens)
+- [x] Xiaomi 13 Ultra
+- [x] Xiaomi 14 
+- [x] Xiaomi 14 Pro 
 
 ----
 
