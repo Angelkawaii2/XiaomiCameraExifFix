@@ -42,7 +42,7 @@ allowing the DNG to "preserve" the shooting information that should otherwise be
 > cd venv
 > ./activate 
 
-####安装依赖 / Install Dependencies
+#### 安装依赖 / Install Dependencies
 > pip install -r requirements.txt
 
 ### 运行 / Run
