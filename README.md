@@ -37,15 +37,18 @@ allowing the DNG to "preserve" the shooting information that should otherwise be
 2. 在运行之前，您可以编辑 ``main.py`` 中的设置项，根据需求开启或关闭。/ Before running this script, you can edit the settings in ``main.py`` and change the settings according to your needs.
 3. 打开终端，运行 / Open the terminal, run :
 
-#### 创建venv 
+### 创建venv /Create venv 
 > python -m venv ./venv/
 > cd venv
-> ./activate
-#### 安装依赖
-> pip install -r requirements.txt
-#### 运行
-> python main.py <dng_dir_path> [jpg_dir_path]
+> ./activate 
 
-### 开源许可证 / License
+####安装依赖 / Install Dependencies
+> pip install -r requirements.txt
+
+### 运行 / Run
+> (venv) python main.py <dng_dir_path> [jpg_dir_path]
+> (Windows) run.bat <dng_dir_path> <jpg_dir_path>
+
+## 开源许可证 / License
 
 MIT LICENSE
