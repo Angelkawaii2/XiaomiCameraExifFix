@@ -35,26 +35,26 @@ MODEL_CONFIG = {
             2.83: "Xiaomi 13 Ultra Front UltraWide Camera",
             2.0: "Xiaomi 13 Ultra Rear UltraWide Camera",  # Sony IMX 858
             2.03: "Xiaomi 13 Ultra Rear UltraWide Camera",  # Sony IMX 858
-            8.7: "Xiaomi 13 Ultra Rear Wide Camera (23mm)",  # Sony IMX 989
-            9.87: "Xiaomi 13 Ultra Rear Telephoto Camera (65mm)",  # Sony IMX 858
-            9.9: "Xiaomi 13 Ultra Rear Telephoto Camera (65mm)",  # Sony IMX 858
-            19.4: "Xiaomi 13 Ultra Rear Super Telephoto Camera (120mm)",  # Sony IMX 858
+            8.7: "Xiaomi 13 Ultra Rear Wide Camera",  # Sony IMX 989
+            9.87: "Xiaomi 13 Ultra Rear Telephoto Camera",  # Sony IMX 858
+            9.9: "Xiaomi 13 Ultra Rear Telephoto Camera",  # Sony IMX 858
+            19.4: "Xiaomi 13 Ultra Rear Super Telephoto Camera",  # Sony IMX 858
         }
     },
     "23127PN0CC": {
         "NAME": "Xiaomi 14",
         "LensMap": {
-            9.0: "Xiaomi 14 Rear Telephoto Camera (75mm)",
-            6.5: "Xiaomi 14 Rear Wide Camera (23mm)",
-            2.2: "Xiaomi 14 Rear UltraWide Camera (14mm)"
+            9.0: "Xiaomi 14 Rear Telephoto Camera",
+            6.5: "Xiaomi 14 Rear Wide Camera",
+            2.2: "Xiaomi 14 Rear UltraWide Camera"
         }
     },
     "23116PN5BC": {
         "NAME": "Xiaomi 14 Pro",
         "LensMap": {
-            10.1: "Xiaomi 14 Pro Rear Telephoto Camera (75mm)",
-            6.7: "Xiaomi 14 Pro Rear Wide Camera (23mm)",
-            2.2: "Xiaomi 14 Pro Rear UltraWide Camera (14mm)"
+            10.1: "Xiaomi 14 Pro Rear Telephoto Camera",
+            6.7: "Xiaomi 14 Pro Rear Wide Camera",
+            2.2: "Xiaomi 14 Pro Rear UltraWide Camera"
         }
     },
 }
