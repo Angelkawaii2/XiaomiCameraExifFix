@@ -57,6 +57,14 @@ MODEL_CONFIG = {
             2.2: "Xiaomi 14 Pro Rear UltraWide Camera"
         }
     },
+    "24031PN0DC": {
+        "NAME": "Xiaomi 14 Ultra",
+        "LensMap": {
+            8.7: "Xiaomi 14 Ultra Rear Wide Camera",
+            12.3: "Xiaomi 14 Ultra Rear Telephoto Camera",
+            19.4: "Xiaomi 14 Ultra Rear Super Telephoto Camera"
+        }
+    }
 }
 
 # =============Config END=============
