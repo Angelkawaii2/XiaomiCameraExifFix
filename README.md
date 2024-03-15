@@ -3,19 +3,14 @@
 ![Lint Test](https://github.com/Angelkawaii2/XiaomiCameraExifFix/actions/workflows/python-package.yml/badge.svg)
 
 一个用于 “修复” 小米13/14 相机专业模式下 DNG 文件缺少 exif 信息的脚本。    
-A script to “fix” missing exif information in DNG files in Xiaomi 13/14 series camera pro mode.
+A script to "FIX" the absence of exif information in DNG files when using the pro mode on Xiaomi 13/14 series cameras.
 
 在 小米13/14 上使用 专业模式 进行 Raw / UltraRaw 摄影时，dng 文件会缺少 GPS位置、镜头、焦距等 EXIF 信息，这会给使用
 Lightroom 等软件输出和管理带来很多不便。  
 此问题已向小米官方反馈，但官方员工表示此问题不会得到修复。  
 因此，该脚本从 DNG 照片伴生的 jpg 文件中复制 EXIF 信息，使得 DNG 能够“保留”原本应该存在的拍摄信息。
 
-When using Raw/UltraRaw camera mode in Pro-mode on the Xiaomi 13/14 series, the dng file will lack EXIF information
-such as GPS location, lens, focal length, etc., which will cause a lot of inconvenience for management.   
-This issue has been reported to Xiaomi official, but official said this issue will not be fixed.
-Therefore, the script copies the EXIF information from the jpg file that accompanies the DNG photo,
-allowing the DNG to "preserve" the shooting information that should otherwise be there.
-
+When using the pro mode for Raw/UltraRaw photography on the Xiaomi 13/14 series, the DNG files lack critical EXIF information like GPS location, lens type, and focal length, creating significant inconveniences for using software like Lightroom for output and management. This issue has been reported to Xiaomi, but representatives have stated it will not be addressed. Thus, this script extracts EXIF information from the accompanying jpg file of the DNG photo, enabling the DNG files to "retain" the original shooting details that are supposed to be present.
 
 ----
 
