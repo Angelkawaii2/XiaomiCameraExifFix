@@ -1,32 +1,30 @@
+import argparse
 import logging
 import os
-import sys
 
 import exiftool
 from exiftool.exceptions import ExifToolExecuteError
 
-# =============Config=============
-DRY_RUN = False
-# 重写对应的机型代号到机型的名称
-# 例如 Xiaomi 2304FPN6DC ==> Xiaomi 13 Ultra
-# -----------------
-# Rewrite the corresponding model codes to model names
-# For example, Xiaomi 2304FPN6DC ==> Xiaomi 13 Ultra
-ENABLE_MODEL_REWRITE = True
-# 由于raw模式下的jpg存在问题，设为True后将在处理完成后自动删除所有raw的伴生jpg
-# 注：ultra-raw 不受影响
-# -----------------
-# Since the jpg files under raw mode have issues
-# setting this to True will automatically delete all the companion jpg files of raw after processing
-# Note: ultra-raw is not affected
-DELETE_TRASH_JPG = True
-# 使用 DNG 中的部分 EXIF 信息
-# use some EXIF information from the DNG files or not.
-USING_DNG_ORIGINAL_EXIF = True
-# Support Windows Properties: Advanced Photo
-SUPPORT_WINDOWS_PROPERTIES = True
 
-# todo: support environment variables
+def parse_arguments():
+    parser = argparse.ArgumentParser(
+        description='Processes DNG and JPG files to correct EXIF data, including model rewriting and deletion of unnecessary JPG files in raw mode.')
+    parser.add_argument('--dng-dir', type=str, required=True,
+                        help='Path to the directory containing DNG files. This is a required argument.')
+    parser.add_argument('--jpg-dir', type=str, required=False,
+                        help='Path to the directory containing JPG files. If not specified, it defaults to the same directory as the DNG files.')
+    parser.add_argument('--dry-run', action='store_true', default=False,
+                        help='If specified, runs the script in dry run mode without applying any changes to the files.')
+    parser.add_argument('--enable-model-rewrite', action='store_true', default=True,
+                        help='Enables rewriting of device model codes to human-readable model names. For example, "Xiaomi 2304FPN6DC" to "Xiaomi 13 Ultra".')
+    parser.add_argument('--delete-trash-jpg', action='store_true', default=True,
+                        help='Automatically deletes all companion JPG files of raw images after processing, excluding ultra-raw images.')
+    parser.add_argument('--using-dng-original-exif', action='store_true', default=True,
+                        help='Uses certain EXIF information from DNG files to enhance metadata accuracy.')
+    parser.add_argument('--support-windows-properties', action='store_true', default=True,
+                        help='Adds support for Microsoft Windows properties in the EXIF data, enhancing compatibility with Windows Advanced Photo features.')
+    return parser.parse_args()
+
 
 MODEL_CONFIG = {
     "2304FPN6DC": {
@@ -44,45 +42,60 @@ MODEL_CONFIG = {
     "23127PN0CC": {
         "NAME": "Xiaomi 14",
         "LensMap": {
-            9.0: "Xiaomi 14 Rear Telephoto Camera",
+            2.2: "Xiaomi 14 Rear UltraWide Camera",
             6.5: "Xiaomi 14 Rear Wide Camera",
-            2.2: "Xiaomi 14 Rear UltraWide Camera"
+            9.0: "Xiaomi 14 Rear Telephoto Camera",
         }
     },
     "23116PN5BC": {
         "NAME": "Xiaomi 14 Pro",
         "LensMap": {
-            10.1: "Xiaomi 14 Pro Rear Telephoto Camera",
+            2.2: "Xiaomi 14 Pro Rear UltraWide Camera",
             6.7: "Xiaomi 14 Pro Rear Wide Camera",
-            2.2: "Xiaomi 14 Pro Rear UltraWide Camera"
+            10.1: "Xiaomi 14 Pro Rear Telephoto Camera",
         }
     },
     "24031PN0DC": {
         "NAME": "Xiaomi 14 Ultra",
         "LensMap": {
-            8.7: "Xiaomi 14 Ultra Rear Wide Camera",
-            12.3: "Xiaomi 14 Ultra Rear Telephoto Camera",
-            19.4: "Xiaomi 14 Ultra Rear Super Telephoto Camera"
+            8.7: "Xiaomi 14 Ultra Rear Wide Camera",  # 24mm
+            12.3: "Xiaomi 14 Ultra Rear Telephoto Camera",  # 75mm
+            19.4: "Xiaomi 14 Ultra Rear Super Telephoto Camera"  # 120mm
+        }
+    },
+    "24053PY09C": {
+        "NAME": "Xiaomi Civi 4 Pro",
+        "LensMap": {
+            1.9: "Xiaomi Civi 4 Pro Rear UltraWide Camera",
+            5.84: "Xiaomi Civi 4 Pro Rear Wide Camera",
+            7.1: "Xiaomi Civi 4 Pro Rear Telephoto Camera"  # 50mm
+        }
+    },
+    "2308CPXD0C": {
+        "NAME": "Xiaomi Mix Fold 3",
+        "LensMap": {
+            1.906: "Xiaomi Mix Fold 3 Rear UltraWide Camera",
+            5.35: "Xiaomi Mix Fold 3 Rear Wide Camera",
+            7.06: "Xiaomi Mix Fold 3 Rear Telephoto Camera",
+            12.12: "Xiaomi Mix Fold 3 Rear Super Telephoto Camera",
         }
     }
 }
+args = parse_arguments()
 
 # =============Config END=============
-
-DNG_DIR_PATH = ""
-JPG_DIR_PATH = ""
 
 basic_tags = ["EXIF:*", "EXIF:GPS*", "XMP:LensModel", "Composite:GPSPosition"]
 
 
 class Stats:
-    pass
+    def __init__(self):
+        self.noGpsInfoCnt = 0  # GPS计数
+        self.noExistJpgCnt = 0  # 不存在计数
+        self.delJpgCnt = 0  # 删除的JPG计数
 
 
 stats = Stats()
-stats.noGpsInfoCnt = 0  # gps计数
-stats.noExistJpgCnt = 0  # 不存在计数
-stats.delJpgCnt = 0
 
 logging.basicConfig(level=logging.INFO)
 
@@ -216,7 +229,7 @@ def process():
                         if SUPPORT_WINDOWS_PROPERTIES:
                             mainLogger.warning(f"{dng_filename}: add Microsoft Windows properties exif")
                             result_tag_map["XMP-microsoft:LensManufacturer"] = dng_exif_info.get("EXIF:Make")
-                            result_tag_map["XMP-microsoft:LensModel"] = dng_exif_info.get("XMP:LensModel")
+                            result_tag_map["XMP-microsoft:LensModel"] = lens_model
 
                         mainLogger.debug(result_tag_map)
 
@@ -246,32 +259,26 @@ def process():
                         mainLogger.error(e.stdout)
                         raise e
                 except KeyError:
-                    raise RuntimeError(
-                        f"Error: Unknown Focal:{exif_focal} in MODEL_CONFIG: {model_config['LensMap']}")
+                    mainLogger.error(f"Error: Unknown focal length:  [{exif_focal}] in MODEL: [{model_config['NAME']}]")
+                    exit(1)
             except KeyError:
-                raise RuntimeError(f"Error: Unsupported Device: {exif_model}")
+                mainLogger.error(f"Error: Unsupported Device Model: {exif_model} in file: {prefix}")
+                exit(1)
 
     mainLogger.info("===============Task Completed！==============")
-    mainLogger.info(f"NoGpsPhotoCnt: {stats.noGpsInfoCnt}")
-    mainLogger.info(f"NoJPGPhotoCnt: {stats.noExistJpgCnt}")
-    mainLogger.info(f"DelTrashJPGCnt: {stats.delJpgCnt}")
+    mainLogger.info(f"Photos without GPS Info: {stats.noGpsInfoCnt}")
+    mainLogger.info(f"Missing JPG Files: {stats.noExistJpgCnt}")
+    mainLogger.info(f"Deleted raw JPG Files: {stats.delJpgCnt}")
     mainLogger.info("===============XiaomiCameraExifFix==============")
 
 
 if __name__ == '__main__':
-    if len(sys.argv) < 2 or len(sys.argv) > 3:
-        mainLogger.info("Usage: main.py <dng_files_path> [jpg_files_path] ")
-        exit(1)
-
-    DNG_DIR_PATH = sys.argv[1]
-    if len(sys.argv) == 2:
-        JPG_DIR_PATH = DNG_DIR_PATH
-    else:
-        JPG_DIR_PATH = sys.argv[2]
-
-    # do Logic
-    mainLogger.info(f"""
-    DNG_Path: {DNG_DIR_PATH}
-    JPG_Path: {JPG_DIR_PATH}
-    """)
+    args = parse_arguments()
+    DNG_DIR_PATH = args.dng_dir
+    JPG_DIR_PATH = args.jpg_dir if args.jpg_dir else args.dng_dir
+    DRY_RUN = args.dry_run
+    ENABLE_MODEL_REWRITE = args.enable_model_rewrite
+    DELETE_TRASH_JPG = args.delete_trash_jpg
+    USING_DNG_ORIGINAL_EXIF = args.using_dng_original_exif
+    SUPPORT_WINDOWS_PROPERTIES = args.support_windows_properties
     process()
