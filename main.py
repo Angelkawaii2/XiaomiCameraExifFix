@@ -80,6 +80,29 @@ MODEL_CONFIG = {
             7.06: "Xiaomi Mix Fold 3 Rear Telephoto Camera",
             12.12: "Xiaomi Mix Fold 3 Rear Super Telephoto Camera",
         }
+    },
+    "2405CPX3DC": {
+        "NAME": "Xiaomi Mix Flip",
+        "LensMap": {
+            5.35: "Xiaomi Mix Flip Rear Wide Camera",
+            6.08: "Xiaomi Mix Flip Rear Normal Camera",
+        }
+    },
+    "Xiaomi MIX Fold 4": {
+        "NAME": "Xiaomi MIX Fold 4",
+        "LensMap": {
+            1.906: "Xiaomi Mix Fold 4 Rear UltraWide Camera",
+            5.35: "Xiaomi Mix Fold 4 Rear Wide Camera",
+            6.8: "Xiaomi Mix Fold 4 Rear Normal Camera",
+            12.12: "Xiaomi Mix Fold 4 Rear Super Telephoto Camera",
+        }
+    },
+    "Redmi K70 Ultra": {
+        "NAME": "Redmi K70 Ultra",
+        "LensMap": {
+            1.65: "Redmi K70 Ultra Rear UltraWide Camera",
+            5.84: "Redmi K70 Ultra Rear Wide Camera",
+        }
     }
 }
 args = parse_arguments()
