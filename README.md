@@ -3,15 +3,29 @@
 ![Lint Test](https://github.com/Angelkawaii2/XiaomiCameraExifFix/actions/workflows/python-package.yml/badge.svg)
 
 一个用于 “修复” 小米徕卡相机在专业模式下 DNG 文件缺少 exif 信息的脚本。      
-A script to "FIX" the lacking exif information in DNG files when using the pro mode on Xiaomi Leica series cameras.
+A script to "FIX" the lacking exif information in DNG files on Xiaomi Leica series cameras.
 
-在 2023年后的小米/红米机型 上使用 专业模式 进行 Raw / UltraRaw 摄影时，dng 文件会缺少 GPS位置、镜头、焦距等 EXIF 信息，这会给使用
-Lightroom 等软件输出和管理带来很多不便。  
-此问题已向小米官方反馈，但官方员工表示“这是特性所以不修”。  
-因此，该脚本从 DNG 照片伴生的 jpg 文件中复制 EXIF 信息，使得 DNG 能够“保留”原本应该存在的拍摄信息。
+在小米或红米设备上使用专业模式进行 Raw/UltraRaw 拍摄时，生成的 DNG 文件会缺少以下 EXIF 元数据：
+- GPS 位置信息
+- 镜头信息
+- 焦距信息
 
-When using the pro mode for Raw/UltraRaw photography on the Xiaomi 13/14 series, the DNG files lack critical EXIF information like GPS location, lens type, and focal length, creating significant inconveniences for using software like Lightroom for output and management. This issue has been reported to Xiaomi, but representatives have stated it will not be addressed. Thus, this script extracts EXIF information from the accompanying jpg file of the DNG photo, enabling the DNG files to "retain" the original shooting details that are supposed to be present.
+缺失这些信息会给使用 Lightroom 等专业软件进行照片管理和输出带来不便。  
+此问题已反馈给小米官方，但其工作人员回应表示这是 **“特性”**，不会修复:)  
+该脚本通过提取伴生 JPG 文件中的 EXIF 元数据，并将其复制到对应的 DNG 文件中，从而恢复 DNG 文件中应有的拍摄信息。  
 
+> When shooting Raw/UltraRaw photos on Xiaomi/Redmi devices, the DNG files lack EXIF metadata, such as:
+> 
+> - GPS location
+> - Lens information
+> - Focal length
+> 
+> This omission creates significant inconvenience for editing and managing photos in software like Lightroom or similar tools.
+> 
+> The issue has been reported to Xiaomi's support team, but their response labeled this behavior as a **"feature"**, with no plans for resolution.
+> 
+> This script extracts EXIF metadata from the accompanying JPG files generated alongside the DNG photos and copies it into the DNG files, effectively restoring the shooting information that should have been present originally.
+> 
 ----
 
 ## 支持机型 / Supported Devices
@@ -26,6 +40,7 @@ When using the pro mode for Raw/UltraRaw photography on the Xiaomi 13/14 series,
 - [x] Xiaomi Mix Flip (2405CPX3DC)
 - [x] Xiaomi Mix Fold 4 
 - [x] Redmi K70 Ultra 
+- [x] Xiaomi 15 / Pro
 
 ----
 
@@ -50,7 +65,7 @@ When using the pro mode for Raw/UltraRaw photography on the Xiaomi 13/14 series,
   Ultra”。
 - `--delete-trash-jpg`: 在处理后自动删除 raw 模式下的所有伴生 JPG 文件，不包括 ultraraw 。
 - `--using-dng-original-exif`: 使用 DNG 照片中已经存在的EXIF，而非JPG的。
-- `--support-windows-properties`: 在EXIF数据中添加对Microsoft Windows属性的支持，增强与 Windows 高级照片功能的兼容性。
+- `--support-windows-properties`: 在EXIF数据中添加对 Windows 属性的支持，增强与 Windows 高级照片功能的兼容性。
 
 ### 示例 / Examples
 

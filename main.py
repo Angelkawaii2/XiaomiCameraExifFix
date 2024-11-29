@@ -103,6 +103,22 @@ MODEL_CONFIG = {
             1.65: "Redmi K70 Ultra Rear UltraWide Camera",
             5.84: "Redmi K70 Ultra Rear Wide Camera",
         }
+    },
+    "Xiaomi 15": {
+        "NAME": "Xiaomi 15",
+        "LensMap": {
+            2.16: "Xiaomi 15 Rear UltraWide Camera",
+            6.55: "Xiaomi 15 Rear Wide Camera",
+            9: "Xiaomi 15 Rear Telephoto Camera",
+        }
+    },
+    "Xiaomi 15 Pro": {
+        "NAME": "Xiaomi 15 Pro",
+        "LensMap": {
+            2.16: "Xiaomi 15 Pro Rear UltraWide Camera",
+            6.68: "Xiaomi 15 Pro Rear Wide Camera",
+            19.4: "Xiaomi 15 Pro Rear Super Telephoto Camera",
+        }
     }
 }
 args = parse_arguments()
