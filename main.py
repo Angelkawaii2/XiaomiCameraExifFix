@@ -27,6 +27,15 @@ def parse_arguments():
 
 
 MODEL_CONFIG = {
+    "Xiaomi 15 Ultra": {
+        "NAME": "Xiaomi 15 Ultra",
+        "LensMap": {
+            2.13: "Xiaomi 15 Ultra Rear UltraWide Camera",
+            8.72: "Xiaomi 15 Ultra Rear Wide Camera",
+            11.5: "Xiaomi 15 Ultra Rear Telephoto Camera",
+            25.1: "Xiaomi 15 Ultra Rear Super Telephoto Camera",
+        }
+    },
     "2304FPN6DC": {
         "NAME": "Xiaomi 13 Ultra",
         "LensMap": {
