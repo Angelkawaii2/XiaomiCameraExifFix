@@ -41,6 +41,7 @@ A script to "FIX" the lacking exif information in DNG files on Xiaomi Leica seri
 - [x] Xiaomi Mix Fold 4 
 - [x] Redmi K70 Ultra 
 - [x] Xiaomi 15 / Pro
+- [x] Xiaomi 15 Ultra
 
 ----
 
